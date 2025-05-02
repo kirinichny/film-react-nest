@@ -1,16 +1,17 @@
 import { Module } from '@nestjs/common';
 import { FilmsController } from './films.controller';
 import { FilmsService } from './films.service';
-import { MongooseModule } from '@nestjs/mongoose';
-import { Film, FilmSchema } from './schemas/film.schema';
-import { FilmRepository } from '../repository/film.repository';
+import { FilmMongoModule } from './modules/film-mongo.module';
+import { FilmPgModule } from './modules/film-pg.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Film.name, schema: FilmSchema }]),
+    ConfigModule.forRoot(),
+    process.env.DATABASE_DRIVER === 'mongo' ? FilmMongoModule : FilmPgModule,
   ],
   controllers: [FilmsController],
-  providers: [FilmsService, FilmRepository],
-  exports: [FilmRepository],
+  providers: [FilmsService],
+  exports: [FilmsService],
 })
 export class FilmsModule {}

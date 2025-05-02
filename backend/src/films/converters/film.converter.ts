@@ -4,7 +4,7 @@ import {
   ScheduleDto,
   ScheduleListResponseDto,
 } from '../dto/films.dto';
-import { IFilm, ISchedule } from '../schemas/film.schema';
+import { IFilm, ISchedule } from '../interfaces/film.interface';
 
 export function toFilmDto(entity: IFilm): FilmDetailsDto {
   return {
