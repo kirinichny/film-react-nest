@@ -1,0 +1,3 @@
+export const TOKENS = {
+  FILM_REPOSITORY: 'FILM_REPOSITORY',
+};

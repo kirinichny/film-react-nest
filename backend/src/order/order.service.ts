@@ -1,5 +1,4 @@
-import { Injectable } from '@nestjs/common';
-import { FilmRepository } from '../repository/film.repository';
+import { Inject, Injectable } from '@nestjs/common';
 import { ERROR_MESSAGES } from '../constants/error-messages.constants';
 import { sprintf } from 'sprintf-js';
 import {
@@ -8,10 +7,15 @@ import {
   TicketDetailsDto,
 } from './dto/order.dto';
 import { toTicketDetailsDto } from './converters/order.converter';
+import { IFilmRepository } from '../repository/film.repository.interface';
+import { TOKENS } from '../constants/tokens';
 
 @Injectable()
 export class OrderService {
-  constructor(private readonly filmRepository: FilmRepository) {}
+  constructor(
+    @Inject(TOKENS.FILM_REPOSITORY)
+    private readonly filmRepository: IFilmRepository,
+  ) {}
 
   async createOrder(
     createOrderDto: CreateOrderRequestDto,

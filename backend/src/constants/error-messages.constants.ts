@@ -3,4 +3,5 @@ export const ERROR_MESSAGES = {
   SESSION_NOT_FOUND: 'Сеанс с ID %s не найден для фильма %s',
   SEAT_ALREADY_TAKEN: 'Место %s уже занято',
   SCHEDULE_NOT_FOUND: 'Расписание с ID %s не найдено',
+  UNKNOWN_DATABASE_TYPE: 'Неизвестный тип базы данных: %s',
 };

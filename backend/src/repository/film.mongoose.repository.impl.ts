@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Film, IFilm } from '../films/schemas/film.schema';
+import { Film } from '../films/schemas/film.schema';
+import { IFilmRepository } from './film.repository.interface';
+import { IFilm } from '../films/interfaces/film.interface';
 
 @Injectable()
-export class FilmRepository {
+export class FilmMongooseRepository implements IFilmRepository {
   constructor(
     @InjectModel(Film.name) private readonly filmModel: Model<IFilm>,
   ) {}

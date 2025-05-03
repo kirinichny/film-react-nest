@@ -1,5 +1,4 @@
-import { Injectable } from '@nestjs/common';
-import { FilmRepository } from '../repository/film.repository';
+import { Inject, Injectable } from '@nestjs/common';
 import { ERROR_MESSAGES } from '../constants/error-messages.constants';
 import { sprintf } from 'sprintf-js';
 import {
@@ -7,10 +6,15 @@ import {
   toScheduleListResponseDto,
 } from './converters/film.converter';
 import { FilmsListResponseDto, ScheduleListResponseDto } from './dto/films.dto';
+import { IFilmRepository } from '../repository/film.repository.interface';
+import { TOKENS } from '../constants/tokens';
 
 @Injectable()
 export class FilmsService {
-  constructor(private readonly filmRepository: FilmRepository) {}
+  constructor(
+    @Inject(TOKENS.FILM_REPOSITORY)
+    private readonly filmRepository: IFilmRepository,
+  ) {}
 
   async getAllFilms(): Promise<FilmsListResponseDto> {
     const films = await this.filmRepository.findAll();
